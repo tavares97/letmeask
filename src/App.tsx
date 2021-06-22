@@ -1,10 +1,11 @@
 import Home from './pages/Home';
+import NewRoom from './pages/NewRoom';
 
 function App() {
 	return (
 		<div>
 			<h1>
-				<Home />
+				<NewRoom />
 			</h1>
 		</div>
 	);
