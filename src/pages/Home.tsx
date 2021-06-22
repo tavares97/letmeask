@@ -7,11 +7,16 @@ import googleLogoSvg from '../assets/images/google-icon.svg';
 import Button from '../components/Button';
 
 import '../styles/auth.scss';
+import { useAuth } from '../hooks/useAuth';
 
 const Home = () => {
 	const history = useHistory();
+	const { user, signInWithGoogle } = useAuth();
 
-	const newRoom = () => {
+	const handleCreateRoom = async () => {
+		if (!user) {
+			await signInWithGoogle();
+		}
 		history.push('/rooms/new');
 	};
 
@@ -25,7 +30,7 @@ const Home = () => {
 			<main>
 				<div className='main-content'>
 					<img src={logoSvg} alt='Logo' />
-					<button className='create-room' onClick={newRoom}>
+					<button className='create-room' onClick={handleCreateRoom}>
 						<img src={googleLogoSvg} alt='Logo google' />
 						Crie a sua sala com o google
 					</button>
