@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import logoImg from '../assets/images/logo.svg';
 import Button from '../components/Button';
+import Question from '../components/Question';
 import RoomCode from '../components/RoomCode';
 
 import { useAuth } from '../hooks/useAuth';
@@ -28,7 +29,7 @@ type FirebaseQuestions = Record<
 	}
 >;
 
-type Question = {
+type QuestionType = {
 	id: string;
 	author: {
 		name: string;
@@ -41,7 +42,7 @@ type Question = {
 
 const Room = () => {
 	const [newQuestion, setNewQuestion] = useState('');
-	const [questions, setQuestions] = useState<Question[]>([]);
+	const [questions, setQuestions] = useState<QuestionType[]>([]);
 	const [title, setTitle] = useState('');
 
 	const params = useParams<RoomParams>();
@@ -135,6 +136,12 @@ const Room = () => {
 						</Button>
 					</div>
 				</form>
+
+				<div className='question-list'>
+					{questions.map(({ content, author, id }) => {
+						return <Question content={content} author={author} key={id} />;
+					})}
+				</div>
 			</main>
 		</div>
 	);
